@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 48" role="img" aria-label="Trama">
+  <g fill="#1F2A44" transform="translate(4 12)">
+    <rect x="0" y="5" width="24" height="5" opacity="0.35"/>
+    <rect x="0" y="14" width="24" height="5" opacity="0.35"/>
+    <rect x="5" y="0" width="5" height="24"/>
+    <rect x="14" y="0" width="5" height="24"/>
+    <rect x="10" y="5" width="4" height="5" opacity="0.35"/>
+    <rect x="0" y="14" width="10" height="5" opacity="0.35"/>
+  </g>
+  <text x="40" y="35" font-family="Italiana, Didot, serif" font-size="32" fill="#1F2A44" letter-spacing="0.6">Trama</text>
+</svg>

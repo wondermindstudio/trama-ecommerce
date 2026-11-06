@@ -1,0 +1,281 @@
+Issue Id,Parent Id,Issue Type,Summary,Epic Name,Description,Priority,Story Points,Status,Labels,Labels,Labels,Labels
+1,,Epic,Fundaciones del proyecto,Fundaciones del proyecto,"Repositorio, estructura, herramientas y CI.",High,,Done,trama,setup,,
+2,1,Task,Crear repositorio en GitHub y estructura monorepo,,"Repositorio con carpetas client/ y server/, npm workspaces, .gitignore, .editorconfig y .nvmrc.
+
+h3. Criterios de aceptación
+* El proyecto instala con un solo npm install
+* README con instrucciones para correr en local",Highest,2,Done,trama,git,setup,
+3,2,Sub-task,Inicializar Git y primer commit,,,Highest,,Done,trama,,,
+4,2,Sub-task,Configurar npm workspaces,,,Highest,,Done,trama,,,
+5,2,Sub-task,Proteger la rama main en GitHub,,,Highest,,To Do,trama,,,
+6,1,Task,Configurar ESLint en front y API,,"Reglas recomendadas de JS y de hooks de React.
+
+h3. Criterios de aceptación
+* npm run lint pasa sin errores",High,1,Done,trama,calidad,,
+7,1,Task,Pipeline de CI con GitHub Actions,,"Lint, tests y build en cada push a main y en cada PR.
+
+h3. Criterios de aceptación
+* El workflow corre en PR
+* Un test roto bloquea el merge",High,2,Done,trama,ci,git,
+8,1,Task,MongoDB local con Docker Compose,,"Servicio mongo:7 con volumen persistente.
+
+h3. Criterios de aceptación
+* docker compose up -d deja Mongo en el puerto 27017",Medium,1,Done,trama,db,setup,
+9,1,Task,Validar variables de entorno al arrancar,,"Esquema Zod para .env con mensajes claros.
+
+h3. Criterios de aceptación
+* La API no levanta si falta MONGODB_URI o JWT_SECRET",Medium,1,Done,trama,api,seguridad,
+10,,Epic,Marca y sistema de diseño,Marca y sistema de diseño,Identidad de Trama aplicada a la interfaz.,High,,Done,trama,diseño,,
+11,10,Task,"Definir marca: nombre, voz, paleta y tipografía",,"Manual de marca de Trama en docs/BRAND.md.
+
+h3. Criterios de aceptación
+* Paleta con contraste AA verificado
+* Tipografías de Google Fonts con display=swap",Highest,3,Done,trama,marca,,
+12,10,Task,Diseñar logo y favicon en SVG,,"Isotipo + logotipo, versión favicon de 32 px.
+
+h3. Criterios de aceptación
+* Se lee a 16 px
+* Archivos en brand/",High,2,Done,trama,marca,,
+13,10,Task,Tokens de diseño en CSS,,"theme.css con color, tipografía, radios y proporciones; base.css usa solo tokens.
+
+h3. Criterios de aceptación
+* Cambiar theme.css cambia la identidad sin tocar componentes",High,3,Done,trama,frontend,diseño,
+14,10,Story,Hero con tejido animado,,"Como visitante quiero entender la propuesta de la marca en la primera pantalla.
+
+h3. Criterios de aceptación
+* Tejido SVG de urdimbre índigo y trama clara
+* La animación de entrada ocurre una sola vez
+* Sin animación con prefers-reduced-motion",High,5,Done,trama,frontend,diseño,
+15,10,Task,Ilustraciones de producto en SVG,,"Componente ProductArt que dibuja cada producto mientras no haya fotos.
+
+h3. Criterios de aceptación
+* Cada ilustración tiene aria-label con el nombre del producto
+* Si el producto tiene images[], se usa la foto",Medium,5,Done,trama,frontend,diseño,
+16,10,Task,"Layout responsive: header, menú móvil y footer",,"Navegación accesible desde 360 px.
+
+h3. Criterios de aceptación
+* Menú móvil con aria-expanded
+* Enlace para saltar al contenido",High,3,Done,trama,frontend,responsive,a11y
+17,,Epic,Autenticación y cuentas,Autenticación y cuentas,"Registro, inicio de sesión, sesión segura y roles.",High,,To Do,trama,auth,,
+18,17,Story,Registro de usuario,,"Como visitante quiero crear una cuenta para comprar y seguir mis pedidos.
+
+h3. Criterios de aceptación
+* Contraseña de 8+ caracteres con letras y números
+* Errores por campo devueltos por la API
+* Email duplicado devuelve 409 con mensaje claro",Highest,3,Done,trama,auth,api,frontend
+19,18,Sub-task,Modelo User con hash bcrypt,,,Highest,,Done,trama,,,
+20,18,Sub-task,POST /auth/register con validación Zod,,,Highest,,Done,trama,,,
+21,18,Sub-task,Página de registro,,,Highest,,Done,trama,,,
+22,17,Story,Inicio y cierre de sesión,,"Como cliente quiero ingresar y salir de mi cuenta de forma segura.
+
+h3. Criterios de aceptación
+* JWT en cookie httpOnly, Secure y SameSite en producción
+* Mismo mensaje para email o contraseña incorrectos
+* Límite de 20 intentos cada 15 minutos",Highest,3,Done,trama,auth,seguridad,
+23,22,Sub-task,POST /auth/login y /auth/logout,,,Highest,,Done,trama,,,
+24,22,Sub-task,Rate limit en rutas de auth,,,Highest,,Done,trama,,,
+25,22,Sub-task,AuthContext en React,,,Highest,,Done,trama,,,
+26,17,Story,Rutas protegidas y roles,,"Como admin quiero que solo yo pueda editar productos y pedidos.
+
+h3. Criterios de aceptación
+* Middleware requireAuth y requireRole
+* Checkout y cuenta redirigen a ingresar y vuelven al terminar",High,2,Done,trama,auth,seguridad,
+27,17,Story,Mi cuenta: pedidos y dirección guardada,,"Como cliente quiero ver mis pedidos y no cargar la dirección cada vez.
+
+h3. Criterios de aceptación
+* Tabla de pedidos con estado
+* Dirección guardada opcional desde el checkout",Medium,3,Done,trama,frontend,,
+28,17,Story,Recuperar contraseña por email,,"Como cliente quiero restablecer mi contraseña si la olvido.
+
+h3. Criterios de aceptación
+* Token de un solo uso con vencimiento de 1 hora
+* Email transaccional (Resend o SendGrid)",Medium,5,To Do,trama,auth,email,
+29,,Epic,Catálogo de productos,Catálogo de productos,"Listado, búsqueda, filtros y ficha de producto.",High,,To Do,trama,catalogo,,
+30,29,Story,Modelo de producto y datos de demo,,"Productos de Trama con variantes, atributos e ilustración.
+
+h3. Criterios de aceptación
+* Precios en pesos enteros
+* Baja lógica (active: false)
+* npm run seed carga el catálogo",Highest,3,Done,trama,api,db,
+31,29,Story,"Listado con filtros, orden y paginación",,"Como cliente quiero filtrar por categoría y ordenar por precio.
+
+h3. Criterios de aceptación
+* Filtros reflejados en la URL (se pueden compartir)
+* Esqueletos de carga
+* Mensaje y acción cuando no hay resultados",Highest,5,Done,trama,frontend,api,
+32,31,Sub-task,GET /products con query validada,,,Highest,,Done,trama,,,
+33,31,Sub-task,Página Catálogo,,,Highest,,Done,trama,,,
+34,31,Sub-task,Chips de categoría con aria-pressed,,,Highest,,Done,trama,,,
+35,29,Story,Búsqueda de texto,,"Como cliente quiero buscar por nombre, material o característica.
+
+h3. Criterios de aceptación
+* Índice de texto en name, description y tags
+* El término queda en la URL",High,2,Done,trama,api,frontend,
+36,29,Story,Ficha de producto con selección de talle,,"Como cliente quiero elegir talle y cantidad antes de agregar al carrito.
+
+h3. Criterios de aceptación
+* No se puede agregar sin elegir variante (mensaje junto al campo)
+* Muestra cuotas sin interés y promociones aplicables
+* Aviso de pocas unidades",Highest,5,Done,trama,frontend,,
+37,29,Story,Guía de talles en la ficha de producto,,"Como clienta quiero ver las medidas de cada talle para elegir sin probarme la prenda.
+
+h3. Criterios de aceptación
+* Tabla de medidas (pecho, largo, cadera) por categoría
+* Se abre en un diálogo accesible con foco atrapado y cierre con Esc
+* Se recuerda el último talle elegido",Medium,5,To Do,trama,frontend,api,
+38,29,Task,Reemplazar ilustraciones por fotos reales,,"Subir fotos a Cloudinary y cargar las URLs en images[].
+
+h3. Criterios de aceptación
+* Formato WebP/AVIF con srcset
+* Texto alternativo descriptivo",Low,3,To Do,trama,contenido,,
+39,,Epic,Carrito y promociones,Carrito y promociones,Carrito persistente y motor de promociones en el servidor.,High,,Done,trama,carrito,,
+40,39,Story,Carrito persistente,,"Como cliente quiero que mi carrito siga ahí si cierro la pestaña.
+
+h3. Criterios de aceptación
+* Zustand con persistencia en localStorage
+* Misma prenda en otra variante es otra línea
+* Aviso accesible al agregar",Highest,3,Done,trama,frontend,,
+41,39,Story,Cotización del carrito en el servidor,,"Como negocio quiero que los montos los calcule siempre la API.
+
+h3. Criterios de aceptación
+* POST /cart/quote usa precios y stock de la base
+* Avisa si un producto se quedó sin stock
+* Debounce de 250 ms en el front",Highest,5,Done,trama,api,seguridad,
+42,39,Story,Motor de promociones,,"Como admin quiero configurar promociones sin tocar código.
+
+h3. Criterios de aceptación
+* Tipos: porcentaje, monto fijo, NxM, envío gratis y medio de pago
+* Alcance por categoría o producto, mínimo de compra y vigencia
+* Tests unitarios con node:test",Highest,8,Done,trama,api,promociones,
+43,42,Sub-task,services/pricing.js puro y testeable,,,Highest,,Done,trama,,,
+44,42,Sub-task,9 tests del motor,,,Highest,,Done,trama,,,
+45,42,Sub-task,Modelo Promotion,,,Highest,,Done,trama,,,
+46,39,Story,Promoción 3x2 en remeras,,"Como clienta quiero llevar tres remeras y pagar dos.
+
+h3. Criterios de aceptación
+* Se bonifica la unidad más barata
+* Aplica solo a la categoría remeras
+* El descuento aparece con su nombre en el resumen",High,2,Done,trama,promociones,,
+47,39,Story,Cupones de descuento,,"Como cliente quiero aplicar un código y ver por qué no funciona si falla.
+
+h3. Criterios de aceptación
+* Un cupón por compra
+* Mensajes: no existe, vencido, mínimo no alcanzado, no aplica a estos productos",High,3,Done,trama,promociones,frontend,
+48,39,Story,Envío gratis desde un monto,,"Como cliente quiero saber cuánto me falta para el envío gratis.
+
+h3. Criterios de aceptación
+* Mensaje 'Sumá $X y el envío es gratis' en el resumen",Medium,2,Done,trama,promociones,,
+49,,Epic,Checkout y pagos,Checkout y pagos,"Datos de envío, medios de pago, tarjetas y cuotas.",High,,To Do,trama,checkout,,
+50,49,Story,Formulario de envío,,"Como cliente quiero cargar la dirección de entrega con validación clara.
+
+h3. Criterios de aceptación
+* Autocompletado del navegador (autocomplete)
+* Errores junto a cada campo y foco al primero inválido",Highest,3,Done,trama,frontend,a11y,
+51,49,Story,Medios de pago y tarjetas,,"Como cliente quiero pagar con crédito, débito, Mercado Pago, transferencia o efectivo.
+
+h3. Criterios de aceptación
+* Tarjetas: Visa, Mastercard, American Express, Naranja X y Cabal
+* Descuento por transferencia aplicado al elegirla
+* Instrucciones de pago para transferencia y efectivo",Highest,5,Done,trama,pagos,frontend,
+52,49,Story,Cuotas con y sin interés,,"Como cliente quiero ver el valor de cada cuota y el total financiado.
+
+h3. Criterios de aceptación
+* Planes: 3 y 6 sin interés o 12 con interés
+* Solo para tarjeta de crédito
+* Recargo visible en el resumen",High,3,Done,trama,pagos,,
+53,49,Story,Crear pedido con reserva de stock,,"Como negocio quiero que nunca se venda más stock del que hay.
+
+h3. Criterios de aceptación
+* Descuento de stock atómico ($inc con condición)
+* Si falla el pago se devuelve el stock
+* Número de pedido legible",Highest,5,Done,trama,api,pedidos,
+54,49,Story,Integración con Mercado Pago Checkout Pro,,"Como cliente quiero pagar en un entorno seguro con mis tarjetas.
+
+h3. Criterios de aceptación
+* Preferencia con total, back_urls y external_reference
+* Los datos de tarjeta no pasan por nuestro servidor (PCI)
+* Proveedor intercambiable: mock o mercadopago",High,8,Done,trama,pagos,api,
+55,54,Sub-task,Proveedor mock para demo,,,High,,Done,trama,,,
+56,54,Sub-task,Proveedor Mercado Pago,,,High,,Done,trama,,,
+57,54,Sub-task,Probar con credenciales y tarjetas de prueba,,,High,,To Do,trama,,,
+58,49,Story,Webhook de pagos con firma verificada,,"Como negocio quiero que el pedido se marque pagado automáticamente.
+
+h3. Criterios de aceptación
+* Valida x-signature con HMAC
+* Consulta el pago a la API antes de cambiar el estado",High,5,Done,trama,pagos,seguridad,
+59,49,Story,Email de confirmación de compra,,"Como cliente quiero recibir el detalle del pedido por email.
+
+h3. Criterios de aceptación
+* Plantilla con productos, total y estado
+* Se envía al aprobarse el pago",Medium,3,To Do,trama,email,,
+60,,Epic,Pedidos y administración,Pedidos y administración,Seguimiento de pedidos y gestión de la tienda.,High,,To Do,trama,admin,,
+61,60,Story,Detalle de pedido para el cliente,,"Como cliente quiero ver el estado de mi compra y cómo pagar si está pendiente.
+
+h3. Criterios de aceptación
+* Mensajes distintos para aprobado, pendiente y rechazado",High,3,Done,trama,frontend,pedidos,
+62,60,Story,API de administración,,"Como admin quiero gestionar productos, promociones y pedidos por API.
+
+h3. Criterios de aceptación
+* ABM de productos y promociones
+* Cambio de estado de pedidos con historial
+* Cancelar devuelve el stock",High,5,Done,trama,api,admin,
+63,60,Story,Panel de administración en el front,,"Como admin quiero gestionar la tienda sin usar Postman.
+
+h3. Criterios de aceptación
+* Listado de pedidos con filtro por estado
+* Formulario de producto
+* Alta y pausa de promociones",Medium,8,To Do,trama,frontend,admin,
+64,63,Sub-task,Ruta /admin protegida por rol,,,Medium,,To Do,trama,,,
+65,63,Sub-task,Tabla de pedidos,,,Medium,,To Do,trama,,,
+66,63,Sub-task,Formulario de productos,,,Medium,,To Do,trama,,,
+67,,Epic,"Calidad, accesibilidad y performance","Calidad, accesibilidad y performance",Buenas prácticas verificables.,High,,To Do,trama,calidad,,
+68,67,Task,Accesibilidad WCAG 2.2 AA,,"Revisión con teclado, lector de pantalla y axe DevTools.
+
+h3. Criterios de aceptación
+* Foco visible en todos los controles
+* Formularios con label y errores asociados
+* Respeta prefers-reduced-motion",High,3,To Do,trama,a11y,,
+69,67,Task,Seguridad de la API,,"Helmet, CORS con origen explícito, límite de body y errores sin stack en producción.
+
+h3. Criterios de aceptación
+* Sin x-powered-by
+* Validación Zod en todas las entradas",High,2,Done,trama,seguridad,,
+70,67,Task,Tests de integración de la API,,"supertest + mongodb-memory-server para auth, carrito y pedidos.
+
+h3. Criterios de aceptación
+* Cubre registro, login, cotización y creación de pedido",Medium,5,To Do,trama,tests,,
+71,67,Task,Tests de componentes,,"vitest + Testing Library para carrito y checkout.
+
+h3. Criterios de aceptación
+* Cubre agregar al carrito, cupón inválido y cambio de medio de pago",Medium,5,To Do,trama,tests,,
+72,67,Task,Performance y SEO,,"Carga diferida de páginas, meta tags y Open Graph.
+
+h3. Criterios de aceptación
+* Lighthouse móvil ≥ 90 en performance, accesibilidad y SEO",Medium,3,To Do,trama,performance,seo,
+73,,Epic,"Deploy, dominio y portfolio","Deploy, dominio y portfolio",Publicar la tienda y presentarla.,High,,To Do,trama,deploy,,
+74,73,Task,Base de datos en MongoDB Atlas,,"Cluster M0, usuario y acceso de red.
+
+h3. Criterios de aceptación
+* Seed ejecutado en Atlas",High,1,To Do,trama,deploy,db,
+75,73,Task,Deploy de la API en Render,,"Servicio web desde render.yaml con variables de entorno.
+
+h3. Criterios de aceptación
+* /api/health responde 200",High,2,To Do,trama,deploy,,
+76,73,Task,Deploy del front en Vercel,,"Root client/, VITE_API_URL y rewrites para SPA.
+
+h3. Criterios de aceptación
+* Recargar una ruta interna no da 404",High,1,To Do,trama,deploy,,
+77,73,Task,Dominio propio: trama.com.ar,,"Registrar el dominio y apuntar DNS a Vercel (raíz) y Render (api.).
+
+h3. Criterios de aceptación
+* HTTPS activo en ambos
+* La cookie de sesión funciona en Safari",Medium,2,To Do,trama,deploy,dominio,
+78,73,Task,Activar Mercado Pago en producción,,"Credenciales, webhook y compra de prueba completa.
+
+h3. Criterios de aceptación
+* Un pago de prueba deja el pedido en 'Pago aprobado'",Medium,2,To Do,trama,pagos,deploy,
+79,73,Task,Presentación en el portfolio,,"README con capturas, link a la demo y decisiones técnicas.
+
+h3. Criterios de aceptación
+* GIF del flujo de compra
+* Sección 'qué aprendí'",Medium,2,To Do,trama,portfolio,,

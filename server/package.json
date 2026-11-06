@@ -1,0 +1,36 @@
+{
+  "name": "trama-server",
+  "version": "1.0.0",
+  "private": true,
+  "description": "API REST de Trama: autenticación, catálogo, carrito con promociones, pedidos y pagos.",
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20.6"
+  },
+  "scripts": {
+    "dev": "node --watch --env-file=.env src/server.js",
+    "start": "node src/server.js",
+    "seed": "node --env-file=.env src/seed/seed.js",
+    "test": "node --test",
+    "lint": "eslint src tests"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mercadopago": "^2.8.0",
+    "mongoose": "^8.15.0",
+    "morgan": "^1.10.0",
+    "zod": "^3.25.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.28.0",
+    "eslint": "^9.28.0",
+    "globals": "^16.2.0"
+  }
+}
